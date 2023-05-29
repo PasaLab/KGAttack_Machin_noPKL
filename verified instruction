@@ -1,0 +1,100 @@
+
+# Sage ml
+1. KGAttack-Mix 0.99 (3090)
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 1 --episode_length 16 --reward_topk 20 --bandit_ratio 0.99 --action_size 200 >> result/agent_select_seed123_epi16_8_64_16_1000epoch_200_0.99_reward_topk20.txt
+2. PoisonRec (v100 性能好像差一些， 3090也跑了效果会好一点，性能就是不一样, 在各自机器上跑的时候，结果是不会变化的)
+python framework.py --candidate_mode all_item --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.99 --action_size 200 >> result/all_item_seed123_epi16_8_64_16_1000epoch_200_0.99_reward_topk20.txt
+3. PoisonRec-KG (v100 波动较大)
+python framework.py --candidate_mode kg_item --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.99 --action_size 200 >> result/kg_item_seed123_epi16_8_64_16_1000epoch_200_0.99_reward_topk20.txt
+3. KGAttack-Target (v100 波动较大,,v100性能差一点)
+python framework.py --candidate_mode target_neighbor --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.99 --action_size 200 >> result/target_neighbor_seed123_epi16_8_64_16_1000epoch_200_0.99_reward_topk20.txt
+4. KGAttack-Global (v100 波动较大,v100性能好一点)
+python framework.py --candidate_mode nearest_neighbor --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 1 --episode_length 16 --reward_topk 20 --bandit_ratio 0.99 --action_size 200 >> result/nearest_neighbor_seed123_epi16_8_64_16_1000epoch_200_0.99_reward_topk20.txt
+
+# Sage bx v100和excel上的结果一样
+1. KGAttack-Mix 0.5！！！ (v100)
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --gpu 0 --episode_length 16 --reward_topk 20 --bandit_ratio 0.5 --action_size 50 --dataset bx >> result_bx/agent_select_seed123_epi16_8_32_16_1000epoch_50_0.5_reward_topk20.txt
+2. PoisonRec (v100 gpu0)
+python framework.py --candidate_mode all_item --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --gpu 0 --episode_length 16 --reward_topk 20 --bandit_ratio 0.95 --action_size 50 --dataset bx >> result_bx/all_item_seed123_epi16_8_32_16_1000epoch_50_0.95_reward_topk20.txt
+3. PoisonRec-KG (v100 gpu0)
+python framework.py --candidate_mode kg_item --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.5 --action_size 50 --dataset bx >> result_bx/kg_item_seed123_epi16_8_32_16_1000epoch_50_0.5_reward_topk20.txt
+4. KGAttack-Target (v100 gpu3)
+python framework.py --candidate_mode target_neighbor --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.5 --action_size 50 --dataset bx >> result_bx/target_neighbor_seed123_epi16_8_32_16_1000epoch_50_0.5_reward_topk20.txt
+5. KGAttack-Global (v100)
+
+# Sage last.fm 
+1. KGAttack-Mix 0.94 hop4 (3090)
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 2 --episode_length 4 --reward_topk 20 --bandit_ratio 0.94 --action_size 50 --dataset lastfm --kg_hop 3 >> result_lastfm/agent_select_seed123_epi4_8_16_8_1000epoch_50_0.94_reward_topk20_hop3.txt
+2. PoisonRec
+python framework.py --candidate_mode all_item --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 1 --episode_length 4 --reward_topk 20 --bandit_ratio 0.2 --action_size 100 --dataset lastfm >> result_lastfm/all_item_seed123_epi4_8_16_8_1000epoch_100_0.2_reward_topk20.txt
+3. PoisonRec-KG ()
+python framework.py --candidate_mode kg_item --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 1 --episode_length 4 --reward_topk 20 --bandit_ratio 0.2 --action_size 100 --dataset lastfm >> result_lastfm/kg_item_seed123_epi4_8_16_8_1000epoch_100_0.2_reward_topk20.txt
+3. KGAttack-Target ()
+python framework.py --candidate_mode target_neighbor --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 2 --episode_length 4 --reward_topk 20 --bandit_ratio 0.94 --action_size 50 --dataset lastfm >> result_lastfm/target_neighbor_seed123_epi4_8_16_8_1000epoch_50_0.94_reward_topk20.txt
+4. KGAttack-Global ()
+python framework.py --candidate_mode nearest_neighbor --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 2 --episode_length 4 --reward_topk 20 --bandit_ratio 0.94 --action_size 50 --dataset lastfm --kg_hop 2 >> result_lastfm/nearest_neighbor_seed123_epi4_8_16_8_1000epoch_50_0.94_reward_topk20_hop2.txt
+
+
+# NeuMF bx
+1. KGAttack-Dynamic
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --gpu 1 --episode_length 16 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 4 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 20 --action_size 50 --bandit_ratio 0.75 --dataset bx >> result_NeuMF_bx/agent_select_seed123_epi16_factor32_layer4_drop0.5_reg0_reg0.001_klreg0.5_20epochs_action50_0.75_reward_topk20.txt
+2. PoisonRec (V100跑的性能好像高一些，3090没跑)
+python framework.py --candidate_mode all_item --max_episodes 50 --seed 123 --gpu 1 --episode_length 16 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 4 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 20 --action_size 50 --bandit_ratio 0.1 --dataset bx >> result_NeuMF_bx/all_item_seed123_epi16_factor32_layer4_drop0.5_reg0_reg0.001_klreg0.5_20epochs_action50_0.1_reward_topk20.txt
+
+
+# NeuMF ml
+1. KGAttack-Dynamic (3090 波动较大)
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --gpu 0 --episode_length 16 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 2 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 10 --action_size 200 --bandit_ratio 0.2 >> result_NeuMF/agent_select_seed123_epi16_factor32_layer2_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action200_0.2_reward_topk20.txt
+
+# NeuMF lastfm
+1.
+python Env_daisy.py --random_method rn --max_episodes 50 --episode_length 4 --seed 123 --action_size 100 --gpu 0 --epochs 10 --dropout 0.5 --factors 32 --num_layers 1 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --dataset lastfm >> result_NeuMF_lastfm/random_rn_seed123_epi4_factor32_layer1_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action100.txt
+3. KGAttack-Mix
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --gpu 0 --episode_length 4 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 1 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 10 --action_size 100 --bandit_ratio 0.7 --dataset lastfm >> result_NeuMF_lastfm/agent_select_seed123_epi4_factor32_layer1_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action100_0.7_reward_topk20.txt
+2. KGAttack-Target
+python framework.py --candidate_mode target_neighbor --max_episodes 50 --seed 123 --gpu 0 --episode_length 4 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 1 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 10 --action_size 100 --bandit_ratio 0.2 --dataset lastfm >> result_NeuMF_lastfm/target_neighbor_seed123_epi4_factor32_layer1_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action100_0.2_reward_topk20.txt
+
+# KGCN ml
+2. TargetAttack-KG
+python Env_kgcn.py --random_method rn --action_size 200 --seed 123 --episode_length 16 --num_train_attacker 3 --gpu 1 --kgcn_aggregator sum --kgcn_epochs 10 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 >> result_kgcn_bx/random_rn_seed123_epi16_nattacker3_action200_16_sum_1_1e-4_epoch10.txt
+6. KGAttack-Global
+python framework.py --candidate_mode nearest_neighbor --action_size 200 --seed 123 --episode_length 16 --num_train_attacker 3 --gpu 2 --kgcn_aggregator sum --kgcn_epochs 10 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 >> result_kgcn_bx/nearest_neighbor_seed123_epi16_nattacker3_action200_16_sum_1_1e-4_epoch10.txt
+
+
+# KGCN bx
+2. TargetAttack-KG
+python Env_kgcn.py --random_method rn --action_size 50 --seed 123 --episode_length 16 --num_train_attacker 3 --gpu 1 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-5 --dataset bx --attack_epochs 2 >> result_kgcn_bx/random_rn_seed123_epi16_nattacker3_action50_16_sum_1_1e-5_epoch5_finetune2.txt
+6. KGAttack-Global
+python framework.py --candidate_mode nearest_neighbor --action_size 50 --seed 123 --episode_length 16 --num_train_attacker 3 --gpu 2 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-5 --dataset bx --attack_epochs 2 >> result_kgcn_bx/nearest_neighbor_seed123_epi16_nattacker3_action50_16_sum_1_1e-5_epoch5_finetune2.txt
+
+
+# KGCN lastfm
+1. TargetAttack
+python Env_kgcn.py --random_method r --action_size 50 --seed 123 --episode_length 8 --num_train_attacker 3 --gpu 0 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 --dataset lastfm --attack_epochs 2 >> result_kgcn_lastfm/random_r_seed123_epi8_nattacker3_action50_16_sum_1_1e-4_epoch5_finetune2.txt
+2. TargetAttack-KG
+python Env_kgcn.py --random_method rn --action_size 50 --seed 123 --episode_length 8 --num_train_attacker 3 --gpu 0 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 --dataset lastfm --attack_epochs 2 >> result_kgcn_lastfm/random_rn_seed123_epi8_nattacker3_action50_16_sum_1_1e-4_epoch5_finetune2.txt
+3. PoisonRec
+python framework.py --candidate_mode all_item --action_size 50 --seed 123 --episode_length 8 --num_train_attacker 3 --gpu 0 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 --dataset lastfm --attack_epochs 2 >> result_kgcn_lastfm/all_item_seed123_epi8_nattacker3_action50_16_sum_1_1e-4_epoch5_finetune2.txt
+4. PoisonRec-KG
+python framework.py --candidate_mode kg_item --action_size 50 --seed 123 --episode_length 8 --num_train_attacker 3 --gpu 2 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 --dataset lastfm --attack_epochs 2 >> result_kgcn_lastfm/kg_item_seed123_epi8_nattacker3_action50_16_sum_1_1e-4_epoch5_finetune2.txt
+5. KGAttack-Target
+python framework.py --candidate_mode target_neighbor --action_size 50 --seed 123 --episode_length 8 --num_train_attacker 3 --gpu 0 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 --dataset lastfm --attack_epochs 2 >> result_kgcn_lastfm/target_neighbor_seed123_epi8_nattacker3_action50_16_sum_1_1e-4_epoch5_finetune2.txt
+6. KGAttack-Global
+python framework.py --candidate_mode nearest_neighbor --action_size 50 --seed 123 --episode_length 8 --num_train_attacker 3 --gpu 0 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 --dataset lastfm --attack_epochs 2 >> result_kgcn_lastfm/nearest_neighbor_seed123_epi8_nattacker3_action50_16_sum_1_1e-4_epoch5_finetune2.txt
+7. KGAttack-Mix
+
+
+# Ablation KGAttack-Mix
+# ml-1m noKGE
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.99 --action_size 200 >> result/agent_select_seed123_epi16_8_64_16_1000epoch_200_0.99_reward_topk20_noKGE.txt
+# ml-1m noGNN
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.99 --action_size 200 >> result/agent_select_seed123_epi16_8_64_16_1000epoch_200_0.99_reward_topk20_noGNN.txt
+# ml-1m noHI
+
+
+#last.fm noKGE
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 2 --episode_length 4 --reward_topk 20 --bandit_ratio 0.94 --action_size 50 --dataset lastfm --kg_hop 3 >> result_lastfm/agent_select_seed123_epi4_8_16_8_1000epoch_50_0.94_reward_topk20_hop3_noKGE.txt
+#last.fm noGNN
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 2 --episode_length 4 --reward_topk 20 --bandit_ratio 0.94 --action_size 50 --dataset lastfm --kg_hop 2 >> result_lastfm/agent_select_seed123_epi4_8_16_8_1000epoch_50_0.94_reward_topk20_hop2_noGNN.txt
+#last.fm HPN
+python framework.py --candidate_mode all_hist --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 1 --episode_length 4 --reward_topk 20 --bandit_ratio 0.2 --action_size 50 --dataset lastfm --kg_hop 3 >> result_lastfm/all_hist_seed123_epi4_8_16_8_1000epoch_50_0.2_reward_topk20_hop3.txt

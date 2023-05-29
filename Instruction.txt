@@ -1,0 +1,106 @@
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --gpu 1 --episode_length 16 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 2 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 10 --action_size 50 --bandit_ratio 0.1 >> result_NeuMF/agent_select_seed123_epi16_factor32_layer2_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action50_0.1_reward_topk20.txt
+python Env_daisy.py --random_method r --max_episodes 30 --episode_length 16 --seed 123 --action_size 200 --gpu 1 --epochs 10 --dropout 0.5 --factors 32 --num_layers 2 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 >> result_NeuMF/random_r_seed123_epi16_factor32_layer2_drop0.5_reg0_reg0.001_klreg0.5_20epochs_action200.txt
+
+注意修改Env
+python framework.py --candidate_mode agent_select --max_episodes 30 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --gpu 1 --episode_length 16 --reward_topk 20 --bandit_ratio 0.001 --action_size 50 >> result/agent_select_seed123_epi16_8_32_16_1000epoch_50_0.2_reward_topk20.txt
+python Env_sage.py --random_method r --max_episodes 30 --seed 123 --action_size 200 --gpu 1 >> result/random_r_seed123_epi8_8_32_16_1000epoch.txt
+
+
+
+复现：
+Sage ml-1m
+rn
+python Env_sage.py --random_method rn --action_size 200 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --episode_length 16 --gpu 0 >> result/random_rn_seed123_epi16_8_64_16_1000epoch_action200.txt
+n
+python Env_sage.py --random_method n --action_size 200 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --episode_length 16 --gpu 2 >> result/random_n_seed123_epi16_8_64_16_1000epoch_action200.txt
+r
+python Env_sage.py --random_method r --action_size 200 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --episode_length 16 --gpu 0 >> result/random_r_seed123_epi16_8_64_16_1000epoch_action200.txt
+# agent_select(KGAttack)
+(best) python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.97 --action_size 200 >> result/agent_select_seed123_epi16_8_64_16_1000epoch_200_0.97_reward_topk20.txt
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.75 --action_size 200 >> result/agent_select_seed123_epi16_8_64_16_1000epoch_200_0.75_reward_topk20.txt
+# nearest_neighbor
+python framework.py --candidate_mode nearest_neighbor --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 0 --episode_length 16 --reward_topk 20 --bandit_ratio 0.2 --action_size 200 >> result/nearest_neighbor_seed123_epi16_8_64_16_1000epoch_200_0.2_reward_topk20.txt
+# target_neighbor
+python framework.py --candidate_mode target_neighbor --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 64 --dim2 16 --gpu 0 --episode_length 16 --reward_topk 20 --bandit_ratio 0.2 --action_size 200 >> result/target_neighbor_seed123_epi16_8_64_16_1000epoch_200_0.2_reward_topk20.txt
+# all_item
+
+# kg_item
+
+
+
+NeuMF ml-1m
+# 
+# agent_select(KGAttack)
+(best)python framework.py --candidate_mode target_neighbor --max_episodes 50 --seed 123 --gpu 2 --episode_length 16 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 2 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 10 --action_size 200 --bandit_ratio 0.7 >> result_NeuMF/target_neighbor_seed123_epi16_factor32_layer2_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action200_0.7_reward_topk20.txt
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --gpu 1 --episode_length 16 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 2 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 10 --action_size 200 --bandit_ratio 0.2 >> result_NeuMF/agent_select_seed123_epi16_factor32_layer2_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action200_0.2_reward_topk20.txt
+# all_item
+python framework.py --candidate_mode all_item --max_episodes 50 --seed 123 --gpu 1 --episode_length 16 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 2 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 10 --action_size 200 --bandit_ratio 0.2 >> result_NeuMF/all_item_seed123_epi16_factor32_layer2_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action200_0.2_reward_topk20.txt
+# kg_item
+
+
+
+Sage bx
+# rn
+python Env_sage.py --random_method rn --action_size 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --episode_length 16 --gpu 1 --dataset bx >> result_bx/random_rn_seed123_epi16_8_32_16_1000epoch_action50.txt
+# n 
+python Env_sage.py --random_method n --action_size 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --episode_length 16 --gpu 1 --dataset bx >> result_bx/random_n_seed123_epi16_8_32_16_1000epoch_action50.txt
+# r 
+python Env_sage.py --random_method r --action_size 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --episode_length 16 --gpu 1 --dataset bx >> result_bx/random_r_seed123_epi16_8_32_16_1000epoch_action50.txt
+# agent_select(KGAttack)
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.5 --action_size 50 --dataset bx >> result_bx/agent_select_seed123_epi16_8_32_16_1000epoch_50_0.5_reward_topk20.txt
+
+# kg_item
+python framework.py --candidate_mode kg_item --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.2 --action_size 50 --dataset bx >> result_bx/kg_item_seed123_epi16_8_32_16_1000epoch_50_0.2_reward_topk20.txt
+# all_item
+python framework.py --candidate_mode all_item --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 32 --dim2 16 --gpu 2 --episode_length 16 --reward_topk 20 --bandit_ratio 0.2 --action_size 50 --dataset bx >> result_bx/all_item_seed123_epi16_8_32_16_1000epoch_50_0.2_reward_topk20.txt
+
+
+NeuMF bx 
+# rn
+python Env_daisy.py --random_method rn --max_episodes 50 --episode_length 16 --seed 123 --action_size 50 --gpu 2 --epochs 20 --dropout 0.5 --factors 32 --num_layers 4 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --dataset bx >> result_NeuMF_bx/random_rn_seed123_epi16_factor32_layer4_drop0.5_reg0_reg0.001_klreg0.5_20epochs_action50.txt
+# n
+# r 
+python Env_daisy.py --random_method r --max_episodes 50 --episode_length 16 --seed 123 --action_size 50 --gpu 3 --epochs 20 --dropout 0.5 --factors 32 --num_layers 4 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --dataset bx >> result_NeuMF_bx/random_r_seed123_epi16_factor32_layer4_drop0.5_reg0_reg0.001_klreg0.5_20epochs_action50.txt
+
+# agent_select(KGAttack)
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --gpu 0 --episode_length 16 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 4 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 20 --action_size 50 --bandit_ratio 0.1 --dataset bx >> result_NeuMF_bx/agent_select_seed123_epi16_factor32_layer4_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action50_0.1_reward_topk20.txt
+
+Sage lastfm
+# r
+# rn
+python Env_sage.py --random_method rn --action_size 100 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --episode_length 4 --gpu 1 --dataset lastfm >> result_lastfm/random_rn_seed123_epi4_8_16_8_1000epoch_action100.txt
+
+# agent_select
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 0 --episode_length 4 --reward_topk 20 --bandit_ratio 0.7 --action_size 100 --dataset lastfm >> result_lastfm/agent_select_seed123_epi4_8_16_8_1000epoch_100_0.7_reward_topk20.txt
+# all_item
+python framework.py --candidate_mode all_item --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 0 --episode_length 4 --reward_topk 20 --bandit_ratio 0.2 --action_size 100 --dataset lastfm >> result_lastfm/all_item_seed123_epi4_8_16_8_1000epoch_100_0.2_reward_topk20.txt
+# kg_item
+python framework.py --candidate_mode kg_item --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 0 --episode_length 4 --reward_topk 20 --bandit_ratio 0.2 --action_size 100 --dataset lastfm >> result_lastfm/kg_item_seed123_epi4_8_16_8_1000epoch_100_0.2_reward_topk20.txt
+# target_neighbor
+python framework.py --candidate_mode target_neighbor --max_episodes 50 --seed 123 --sage_epoch 1000 --init_dim 8 --dim1 16 --dim2 8 --gpu 0 --episode_length 4 --reward_topk 20 --bandit_ratio 0.97 --action_size 100 --dataset lastfm >> result_lastfm/target_neighbor_seed123_epi4_8_16_8_1000epoch_100_0.97_reward_topk20.txt
+
+
+
+NeuMF lastfm
+# r
+# rn 
+python Env_daisy.py --random_method rn --max_episodes 50 --episode_length 4 --seed 123 --action_size 100 --gpu 0 --epochs 10 --dropout 0.5 --factors 32 --num_layers 1 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --dataset lastfm >> result_NeuMF_lastfm/random_rn_seed123_epi4_factor32_layer1_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action100.txt
+# agent_select
+python framework.py --candidate_mode agent_select --max_episodes 50 --seed 123 --gpu 0 --episode_length 4 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 1 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 10 --action_size 100 --bandit_ratio 0.7 --dataset lastfm >> result_NeuMF_lastfm/agent_select_seed123_epi4_factor32_layer1_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action100_0.7_reward_topk20.txt
+
+# tareget_neighbor
+python framework.py --candidate_mode target_neighbor --max_episodes 50 --seed 123 --gpu 0 --episode_length 4 --reward_topk 20 --dropout 0.5 --factors 32 --num_layers 1 --reg_1 0.0 --reg_2 0.001 --kl_reg 0.5 --epochs 10 --action_size 100 --bandit_ratio 0.2 --dataset lastfm >> result_NeuMF_lastfm/target_neighbor_seed123_epi4_factor32_layer1_drop0.5_reg0_reg0.001_klreg0.5_10epochs_action100_0.2_reward_topk20.txt
+
+
+Sage ml20m
+# r 
+# rn
+
+NeuMF ml20m
+
+
+KGCN
+python framework.py --candidate_mode nearest_neighbor --action_size 100 --seed 123 --episode_length 8 --num_train_attacker 3 --gpu 2 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 --dataset lastfm >> result_kgcn_lastfm/nearest_neighbor_seed123_epi8_nattacker3_action100_16_sum_1_1e-4_epoch5.txt
+python framework.py --candidate_mode agent_select --action_size 100 --seed 123 --episode_length 16 --num_train_attacker 3 --gpu 1 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 --dataset bx --bandit_ratio 0.7 >> result_kgcn_lastfm/agent_select_0.7_seed123_epi16_nattacker3_action100_16_sum_1_1e-4_epoch5.txt
+python framework.py --candidate_mode all_item --action_size 100 --seed 123 --episode_length 8 --num_train_attacker 3 --gpu 2 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 --dataset lastfm >> result_kgcn_lastfm/all_item_seed123_epi8_nattacker3_action100_16_sum_1_1e-4_epoch5.txt
+python Env_kgcn.py --random_method r --action_size 100 --seed 123 --episode_length 16 --num_train_attacker 3 --gpu 1 --kgcn_aggregator sum --kgcn_epochs 5 --kgcn_dim 16 --kgcn_n_iter 1 --kgcn_l2_weight 1e-4 --dataset lastfm >> result_kgcn_lastfm/random_r_seed123_epi16_nattacker3_action100_16_sum_1_1e-4_epoch5.txt
